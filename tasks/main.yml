@@ -44,7 +44,10 @@
 
 - name: Verify Node Exporter is responding
   ansible.builtin.uri:
-    url: "http://{{ node_exporter_host }}:{{ node_exporter_port }}"
+    url: "{{ node_exporter_verify_url }}"
+    url_username: "{{ node_exporter_verfiy_username | default(omit) }}"
+    url_password: "{{ node_exporter_verify_password | default(omit) }}"
+    validate_certs: "{{ node_exporter_verify_certs | default(omit) }}"
     return_content: true
   register: node_exporter_metrics_response
   failed_when: "'Metrics' not in node_exporter_metrics_response.content"

@@ -22,5 +22,4 @@ node_exporter_webconfig: ""
 #     key_file: /tls.key
 
 # Node Exporter Connection Details (Verify)
-node_exporter_host: localhost
-node_exporter_port: 9100
+node_exporter_verify_url: "http://localhost:9100"
