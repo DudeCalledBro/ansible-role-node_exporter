@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+---
+services:
+  node-exporter:
+    image: "{{ node_expoter_image }}"
+    container_name: node-exporter
+    network_mode: host
+    restart: always
+    volumes:
+    {%- if node_exporter_webconfig and node_exporter_webconfig | length %}
+    - "{{ node_exporter_path }}/web.yml:/etc/prometheus/web.yml:ro"
+    {%- endif %}
+    {%- for mount in node_exporter_mounts if node_exporter_mounts | length %}
+    - "{{ mount }}"
+    {%- endfor %}
+    - "/proc:/host/proc:ro"
+    - "/sys:/host/sys:ro"
+    - "/:/rootfs:ro"
+    command:
+    - "--path.procfs=/host/proc"
+    - "--path.rootfs=/rootfs"
+    - "--path.sysfs=/host/sys"
+    - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+    {%- if node_exporter_webconfig and node_exporter_webconfig | length %}
+    - "--web.config.file=/etc/prometheus/web.yml"
+    {%- endif %}
+    {%- for command in node_exporter_commands if node_exporter_commands | length %}
+    - "{{ command }}"
+    {%- endfor %}

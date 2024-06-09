@@ -1,0 +1,7 @@
+- name: Restart Node Exporter Docker Container
+  ansible.builtin.command: >-
+    docker compose --ansi never --progress plain restart
+  args:
+    chdir: "{{ node_exporter_path }}"
+  changed_when: true
+  listen: restart node exporter

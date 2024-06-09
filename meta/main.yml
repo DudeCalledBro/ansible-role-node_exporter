@@ -1,0 +1,37 @@
+dependencies: []
+
+galaxy_info:
+  role_name: node_exporter
+  author: dudecalledbro
+  description: Ansible Role Prometheus Node Exporter.
+  license: "license (MIT)"
+  min_ansible_version: "2.15"
+  platforms:
+  - name: EL
+    versions:
+    - "8"
+    - "9"
+
+  - name: Debian
+    versions:
+    - all
+
+  - name: Fedora
+    versions:
+    - all
+
+  - name: opensuse
+    versions:
+    - all
+
+  - name: Ubuntu
+    versions:
+    - all
+
+  galaxy_tags:
+  - docker
+  - exporter
+  - metrics
+  - node
+  - prometheus
+  - system
