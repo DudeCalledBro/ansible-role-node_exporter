@@ -7,6 +7,9 @@
     mode: 0755
 
 - name: Create Node Exporter Web Configuration
+  when:
+  - node_exporter_webconfig is defined
+  - node_exporter_webconfig | length
   ansible.builtin.copy:
     content: "{{ node_exporter_webconfig }}"
     dest: "{{ node_exporter_path }}/web.yml"
